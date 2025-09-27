@@ -166,27 +166,27 @@ class MNISTNet(nn.Module):
 
         # CONVOLUTION BLOCK 2
         self.convblock4 = nn.Sequential(
-            nn.Conv2d(in_channels=10, out_channels=16, kernel_size=(3, 3), padding=0, bias=False),
+            nn.Conv2d(in_channels=10, out_channels=8, kernel_size=(3, 3), padding=0, bias=False),
             nn.ReLU(),            
-            nn.BatchNorm2d(16),
+            nn.BatchNorm2d(8),
             nn.Dropout(dropout_value)
         ) # output_size = 10
         self.convblock5 = nn.Sequential(
-            nn.Conv2d(in_channels=16, out_channels=16, kernel_size=(3, 3), padding=0, bias=False),
+            nn.Conv2d(in_channels=8, out_channels=8, kernel_size=(3, 3), padding=0, bias=False),
             nn.ReLU(),            
-            nn.BatchNorm2d(16),
+            nn.BatchNorm2d(8),
             nn.Dropout(dropout_value)
         ) # output_size = 8
         self.convblock6 = nn.Sequential(
-            nn.Conv2d(in_channels=16, out_channels=16, kernel_size=(3, 3), padding=0, bias=False),
+            nn.Conv2d(in_channels=8, out_channels=8, kernel_size=(3, 3), padding=0, bias=False),
             nn.ReLU(),            
-            nn.BatchNorm2d(16),
+            nn.BatchNorm2d(8),
             nn.Dropout(dropout_value)
         ) # output_size = 6
         self.convblock7 = nn.Sequential(
-            nn.Conv2d(in_channels=16, out_channels=16, kernel_size=(3, 3), padding=1, bias=False),
+            nn.Conv2d(in_channels=8, out_channels=8, kernel_size=(3, 3), padding=1, bias=False),
             nn.ReLU(),            
-            nn.BatchNorm2d(16),
+            nn.BatchNorm2d(8),
             nn.Dropout(dropout_value)
         ) # output_size = 6
         
@@ -196,7 +196,7 @@ class MNISTNet(nn.Module):
         ) # output_size = 1
 
         self.convblock8 = nn.Sequential(
-            nn.Conv2d(in_channels=16, out_channels=10, kernel_size=(1, 1), padding=0, bias=False),
+            nn.Conv2d(in_channels=8, out_channels=10, kernel_size=(1, 1), padding=0, bias=False),
             # nn.BatchNorm2d(10),
             # nn.ReLU(),
             # nn.Dropout(dropout_value)
@@ -407,10 +407,13 @@ def main() -> None:
 if __name__ == "__main__":
     main()
 
-''' 
-Training LOG:
+'''
 Starting MNIST Training...
 Using device: cpu
+100%|██████████████████████████████████████████████████████████████████████████| 9.91M/9.91M [00:00<00:00, 13.2MB/s]
+100%|███████████████████████████████████████████████████████████████████████████| 28.9k/28.9k [00:00<00:00, 409kB/s]
+100%|██████████████████████████████████████████████████████████████████████████| 1.65M/1.65M [00:00<00:00, 4.43MB/s]
+100%|██████████████████████████████████████████████████████████████████████████| 4.54k/4.54k [00:00<00:00, 5.76MB/s]
 
 Model running on: cpu
 ----------------------------------------------------------------
@@ -426,124 +429,123 @@ Model running on: cpu
            Dropout-8           [-1, 32, 24, 24]               0
             Conv2d-9           [-1, 10, 24, 24]             320
         MaxPool2d-10           [-1, 10, 12, 12]               0
-           Conv2d-11           [-1, 16, 10, 10]           1,440
-             ReLU-12           [-1, 16, 10, 10]               0
-      BatchNorm2d-13           [-1, 16, 10, 10]              32
-          Dropout-14           [-1, 16, 10, 10]               0
-           Conv2d-15             [-1, 16, 8, 8]           2,304
-             ReLU-16             [-1, 16, 8, 8]               0
-      BatchNorm2d-17             [-1, 16, 8, 8]              32
-          Dropout-18             [-1, 16, 8, 8]               0
-           Conv2d-19             [-1, 16, 6, 6]           2,304
-             ReLU-20             [-1, 16, 6, 6]               0
-      BatchNorm2d-21             [-1, 16, 6, 6]              32
-          Dropout-22             [-1, 16, 6, 6]               0
-           Conv2d-23             [-1, 16, 6, 6]           2,304
-             ReLU-24             [-1, 16, 6, 6]               0
-      BatchNorm2d-25             [-1, 16, 6, 6]              32
-          Dropout-26             [-1, 16, 6, 6]               0
-        AvgPool2d-27             [-1, 16, 1, 1]               0
-           Conv2d-28             [-1, 10, 1, 1]             160
+           Conv2d-11            [-1, 8, 10, 10]             720
+             ReLU-12            [-1, 8, 10, 10]               0
+      BatchNorm2d-13            [-1, 8, 10, 10]              16
+          Dropout-14            [-1, 8, 10, 10]               0
+           Conv2d-15              [-1, 8, 8, 8]             576
+             ReLU-16              [-1, 8, 8, 8]               0
+      BatchNorm2d-17              [-1, 8, 8, 8]              16
+          Dropout-18              [-1, 8, 8, 8]               0
+           Conv2d-19              [-1, 8, 6, 6]             576
+             ReLU-20              [-1, 8, 6, 6]               0
+      BatchNorm2d-21              [-1, 8, 6, 6]              16
+          Dropout-22              [-1, 8, 6, 6]               0
+           Conv2d-23              [-1, 8, 6, 6]             576
+             ReLU-24              [-1, 8, 6, 6]               0
+      BatchNorm2d-25              [-1, 8, 6, 6]              16
+          Dropout-26              [-1, 8, 6, 6]               0
+        AvgPool2d-27              [-1, 8, 1, 1]               0
+           Conv2d-28             [-1, 10, 1, 1]              80
 ================================================================
-Total params: 13,808
-Trainable params: 13,808
+Total params: 7,760
+Trainable params: 7,760
 Non-trainable params: 0
 ----------------------------------------------------------------
 Input size (MB): 0.00
-Forward/backward pass size (MB): 1.06
-Params size (MB): 0.05
-Estimated Total Size (MB): 1.12
+Forward/backward pass size (MB): 1.01
+Params size (MB): 0.03
+Estimated Total Size (MB): 1.04
 ----------------------------------------------------------------
 
 Starting training for 15 epochs...
 
 Epoch 1/15
-Epoch 1: Loss=0.061578 Batch=937 Accuracy=91.68%: 100%|███████████████████████████| 938/938 [00:47<00:00, 19.61it/s]
+Epoch 1: Loss=0.114739 Batch=937 Accuracy=86.98%: 100%|███████████████████████████| 938/938 [00:45<00:00, 20.50it/s]
 
-Test set: Average loss: 0.0490, Accuracy: 9858/10000 (98.58%)
+Test set: Average loss: 0.0830, Accuracy: 9775/10000 (97.75%)
 
 
 Epoch 2/15
-Epoch 2: Loss=0.100756 Batch=937 Accuracy=97.88%: 100%|███████████████████████████| 938/938 [00:48<00:00, 19.41it/s]
+Epoch 2: Loss=0.052996 Batch=937 Accuracy=96.31%: 100%|███████████████████████████| 938/938 [00:46<00:00, 20.26it/s]
 
-Test set: Average loss: 0.0370, Accuracy: 9896/10000 (98.96%)
+Test set: Average loss: 0.0527, Accuracy: 9846/10000 (98.46%)
 
 
 Epoch 3/15
-Epoch 3: Loss=0.129062 Batch=937 Accuracy=98.27%: 100%|███████████████████████████| 938/938 [00:48<00:00, 19.25it/s]
+Epoch 3: Loss=0.056292 Batch=937 Accuracy=97.12%: 100%|███████████████████████████| 938/938 [00:47<00:00, 19.89it/s]
 
-Test set: Average loss: 0.0293, Accuracy: 9917/10000 (99.17%)
+Test set: Average loss: 0.0425, Accuracy: 9878/10000 (98.78%)
 
 
 Epoch 4/15
-Epoch 4: Loss=0.019222 Batch=937 Accuracy=98.37%: 100%|███████████████████████████| 938/938 [00:48<00:00, 19.26it/s]
+Epoch 4: Loss=0.020482 Batch=937 Accuracy=97.32%: 100%|███████████████████████████| 938/938 [00:48<00:00, 19.45it/s]
 
-Test set: Average loss: 0.0230, Accuracy: 9923/10000 (99.23%)
+Test set: Average loss: 0.0392, Accuracy: 9879/10000 (98.79%)
 
 
 Epoch 5/15
-Epoch 5: Loss=0.016708 Batch=937 Accuracy=98.59%: 100%|███████████████████████████| 938/938 [00:48<00:00, 19.17it/s]
+Epoch 5: Loss=0.173778 Batch=937 Accuracy=97.59%: 100%|██████████████████████████████████████████████████████████| 938/938 [00:47<00:00, 19.73it/s]
 
-Test set: Average loss: 0.0246, Accuracy: 9923/10000 (99.23%)
+Test set: Average loss: 0.0512, Accuracy: 9851/10000 (98.51%)
 
 
 Epoch 6/15
-Epoch 6: Loss=0.087822 Batch=937 Accuracy=98.94%: 100%|███████████████████████████| 938/938 [00:48<00:00, 19.19it/s]
+Epoch 6: Loss=0.090312 Batch=937 Accuracy=97.97%: 100%|██████████████████████████████████████████████████████████| 938/938 [00:47<00:00, 19.83it/s]
 
-Test set: Average loss: 0.0210, Accuracy: 9940/10000 (99.40%)
+Test set: Average loss: 0.0327, Accuracy: 9900/10000 (99.00%)
 
 
 Epoch 7/15
-Epoch 7: Loss=0.001849 Batch=937 Accuracy=99.00%: 100%|███████████████████████████| 938/938 [00:48<00:00, 19.17it/s]
+Epoch 7: Loss=0.195077 Batch=937 Accuracy=98.06%: 100%|██████████████████████████████████████████████████████████| 938/938 [00:47<00:00, 19.73it/s]
 
-Test set: Average loss: 0.0204, Accuracy: 9937/10000 (99.37%)
+Test set: Average loss: 0.0308, Accuracy: 9909/10000 (99.09%)
 
 
 Epoch 8/15
-Epoch 8: Loss=0.005615 Batch=937 Accuracy=99.03%: 100%|███████████████████████████| 938/938 [00:49<00:00, 19.13it/s]
+Epoch 8: Loss=0.062981 Batch=937 Accuracy=98.26%: 100%|██████████████████████████████████████████████████████████| 938/938 [00:47<00:00, 19.76it/s]
 
-Test set: Average loss: 0.0203, Accuracy: 9942/10000 (99.42%)
+Test set: Average loss: 0.0300, Accuracy: 9916/10000 (99.16%)
 
 
 Epoch 9/15
-Epoch 9: Loss=0.057111 Batch=937 Accuracy=99.00%: 100%|███████████████████████████| 938/938 [00:49<00:00, 19.13it/s]
+Epoch 9: Loss=0.103134 Batch=937 Accuracy=98.12%: 100%|██████████████████████████████████████████████████████████| 938/938 [00:47<00:00, 19.55it/s]
 
-Test set: Average loss: 0.0204, Accuracy: 9940/10000 (99.40%)
+Test set: Average loss: 0.0286, Accuracy: 9921/10000 (99.21%)
 
 
 Epoch 10/15
-Epoch 10: Loss=0.013061 Batch=937 Accuracy=99.02%: 100%|██████████████████████████| 938/938 [00:49<00:00, 19.10it/s]
+Epoch 10: Loss=0.038585 Batch=937 Accuracy=98.21%: 100%|█████████████████████████████████████████████████████████| 938/938 [00:47<00:00, 19.60it/s]
 
-Test set: Average loss: 0.0194, Accuracy: 9941/10000 (99.41%)
+Test set: Average loss: 0.0289, Accuracy: 9915/10000 (99.15%)
 
 
 Epoch 11/15
-Epoch 11: Loss=0.004599 Batch=937 Accuracy=99.03%: 100%|██████████████████████████| 938/938 [00:49<00:00, 19.12it/s]
+Epoch 11: Loss=0.051548 Batch=937 Accuracy=98.17%: 100%|█████████████████████████████████████████████████████████| 938/938 [00:47<00:00, 19.56it/s]
 
-Test set: Average loss: 0.0193, Accuracy: 9940/10000 (99.40%)
+Test set: Average loss: 0.0298, Accuracy: 9909/10000 (99.09%)
 
 
 Epoch 12/15
-Epoch 12: Loss=0.087383 Batch=937 Accuracy=99.07%: 100%|██████████████████████████| 938/938 [00:48<00:00, 19.15it/s]
+Epoch 12: Loss=0.027728 Batch=937 Accuracy=98.24%: 100%|█████████████████████████████████████████████████████████| 938/938 [00:47<00:00, 19.69it/s]
 
-Test set: Average loss: 0.0191, Accuracy: 9945/10000 (99.45%)
+Test set: Average loss: 0.0290, Accuracy: 9913/10000 (99.13%)
 
 
 Epoch 13/15
-Epoch 13: Loss=0.168269 Batch=937 Accuracy=99.08%: 100%|██████████████████████████| 938/938 [00:49<00:00, 19.12it/s]
+Epoch 13: Loss=0.063699 Batch=937 Accuracy=98.23%: 100%|█████████████████████████████████████████████████████████| 938/938 [00:47<00:00, 19.60it/s]
 
-Test set: Average loss: 0.0194, Accuracy: 9940/10000 (99.40%)
+Test set: Average loss: 0.0288, Accuracy: 9919/10000 (99.19%)
 
 
 Epoch 14/15
-Epoch 14: Loss=0.004693 Batch=937 Accuracy=99.06%: 100%|██████████████████████████| 938/938 [00:49<00:00, 19.08it/s]
+Epoch 14: Loss=0.019240 Batch=937 Accuracy=98.26%: 100%|█████████████████████████████████████████████████████████| 938/938 [00:47<00:00, 19.77it/s]
 
-Test set: Average loss: 0.0189, Accuracy: 9944/10000 (99.44%)
+Test set: Average loss: 0.0292, Accuracy: 9916/10000 (99.16%)
 
 
 Epoch 15/15
-Epoch 15: Loss=0.013828 Batch=937 Accuracy=99.11%: 100%|██████████████████████████| 938/938 [00:49<00:00, 19.09it/s]
+Epoch 15: Loss=0.021340 Batch=937 Accuracy=98.24%: 100%|█████████████████████████████████████████████████████████| 938/938 [00:47<00:00, 19.56it/s]
 
-Test set: Average loss: 0.0193, Accuracy: 9940/10000 (99.40%)
-
+Test set: Average loss: 0.0296, Accuracy: 9915/10000 (99.15%)
 '''
